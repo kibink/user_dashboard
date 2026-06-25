@@ -1,0 +1,15 @@
+{
+  "name": "user_dashboard",
+  "version": "1.0.0",
+  "description": "The fifth Itransition task",
+  "license": "ISC",
+  "author": "kibin.k.u@gmail.com",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\""
+  },
+  "dependencies": {
+    "concurrently": "^10.0.3"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "The back end for the fifth Itransition task",
+  "keywords": [
+    "express",
+    "postgresql",
+    "itransition"
+  ],
+  "license": "ISC",
+  "author": "kibin.k.u@gmail.com",
+  "type": "module",
+  "main": "server.ts",
+  "scripts": {
+    "start": "node src/server.ts",
+    "dev": "tsx watch src/server.ts",
+    "generate": "drizzle-kit push"
+  },
+  "dependencies": {
+    "argon2": "^0.44.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "drizzle-kit": "^1.0.0-beta.22",
+    "drizzle-orm": "^1.0.0-beta.22",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mailersend": "^3.0.0",
+    "nodemon": "^3.1.14",
+    "pg": "^8.21.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.6",
+    "@types/pg": "^8.20.0"
+  }
+}
