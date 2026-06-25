@@ -18,14 +18,19 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    const data = error.response?.data
+    const data = error.response?.data;
 
-    return Promise.reject(
-      new ApiError(
-        data.code,
-        data.message,
-        data.details
-      )
-    );
+    if (
+      typeof data === "object" &&
+      data !== null &&
+      "code" in data &&
+      "message" in data
+    ) {
+      return Promise.reject(
+        new ApiError(data.code, data.message, data.details),
+      );
+    }
+
+    return Promise.reject(error);
   },
 );

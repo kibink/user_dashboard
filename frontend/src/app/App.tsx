@@ -34,7 +34,7 @@ function App() {
       message: "Email was sent ✅",
     },
     error: {
-      title: "Success",
+      title: "Error",
       message: `Failed to send email: ${sendEmailError?.message || "Unexpected error"}`,
     },
   };
