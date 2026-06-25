@@ -6,7 +6,7 @@ import UserToolbar from "@/features/users/components/UserToolbar";
 import { Container } from "react-bootstrap";
 
 export default function DashboardPage() {
-  const [selectedIds, setSelectedIds] = useState([]);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   return (
     <CenteredLayout>

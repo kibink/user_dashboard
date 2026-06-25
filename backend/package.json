@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "The back end for the fifth Itransition task",
+  "description": "The back end for the forth Itransition task",
   "keywords": [
     "express",
     "postgresql",

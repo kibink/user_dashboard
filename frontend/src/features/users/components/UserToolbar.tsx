@@ -1,37 +1,42 @@
+import type { MouseEventHandler } from "react";
 import { Button, Container, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { FaBroom, FaLock, FaTrash, FaUnlock } from "react-icons/fa6";
 import { useDeleteUsers } from "@/features/users/hooks/delete-users";
 import { useBlockUsers } from "@/features/users/hooks/block-users";
 import { useUnblockUsers } from "@/features/users/hooks/unblock-users";
 
-export default function UserToolbar({ selectedIds }) {
+interface UserToolbarProps {
+  selectedIds: string[];
+}
+
+export default function UserToolbar({ selectedIds }: UserToolbarProps) {
   const { mutate: blockUsers } = useBlockUsers();
   const { mutate: unblockUsers } = useUnblockUsers();
   const { mutate: deleteUsers } = useDeleteUsers();
 
-  const handleBlock = (e) => {
+  const handleBlock: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     blockUsers({ ids: selectedIds });
   };
 
-  const handleUnblock = (e) => {
+  const handleUnblock: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     unblockUsers({ ids: selectedIds });
   };
 
-  const handleDelete = (e) => {
+  const handleDelete: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     deleteUsers({ ids: selectedIds });
   };
 
-  const handleDeleteUnverified = (e) => {
+  const handleDeleteUnverified: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     deleteUsers({ ids: selectedIds, isVerified: false });
   };
 
-  const isDisabled = selectedIds.length == 0;
+  const isDisabled = selectedIds.length === 0;
 
-  const renderTooltip = (tip) => <Tooltip>{tip}</Tooltip>;
+  const renderTooltip = (tip: string) => <Tooltip>{tip}</Tooltip>;
 
   return (
     <Container className="d-flex gap-1 p-0">

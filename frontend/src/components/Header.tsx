@@ -1,9 +1,18 @@
+import type { MouseEventHandler } from "react";
 import { useLogout } from "@/features/auth/hooks/logout";
 import { useMe } from "@/features/users/hooks/me";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { useNavigate } from "react-router";
 
-export default function Header({ handleSendEmail, isSendEmailSuccess }) {
+interface HeaderProps {
+  handleSendEmail: MouseEventHandler<HTMLAnchorElement>;
+  isSendEmailSuccess: boolean;
+}
+
+export default function Header({
+  handleSendEmail,
+  isSendEmailSuccess,
+}: HeaderProps) {
   const { data, isLoading } = useMe();
   const { mutate: logout, isPending } = useLogout();
   const navigate = useNavigate();

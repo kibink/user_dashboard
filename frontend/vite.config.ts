@@ -7,6 +7,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
   return {
+    base: "./",
     plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
     resolve: {
       alias: {

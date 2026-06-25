@@ -1,3 +1,4 @@
+import type { ChangeEvent } from "react";
 import { useState } from "react";
 import { Alert, Button, Form, Row } from "react-bootstrap";
 import { useLogin } from "@/features/auth/hooks/login";
@@ -9,35 +10,38 @@ export default function LoginForm() {
 
   const { mutate, isPending, error } = useLogin();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     mutate({ email, password });
   };
 
   const getError = () => {
-      if (error) {
-        if (error instanceof ApiError) {
-          if (error.code === "VALIDATION_ERROR") {
-            return error.details[0].message;
-          }
-        }
-        return error.message;
+    if (!error) {
+      return undefined;
+    }
+
+    if (error instanceof ApiError) {
+      if (error.code === "VALIDATION_ERROR") {
+        return error.details?.[0]?.message || error.message;
       }
-    };
+    }
+
+    return error.message;
+  };
 
   return (
     <Form onSubmit={handleSubmit}>
       {error && (
-        <Alert variant="danger">
-          {getError() || "Something went wrong"}
-        </Alert>
+        <Alert variant="danger">{getError() || "Something went wrong"}</Alert>
       )}
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control
           type="email"
           placeholder="Enter email"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setEmail(e.target.value)
+          }
         />
       </Form.Group>
 
@@ -46,7 +50,9 @@ export default function LoginForm() {
         <Form.Control
           type="password"
           placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setPassword(e.target.value)
+          }
         />
       </Form.Group>
 

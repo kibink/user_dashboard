@@ -1,15 +1,28 @@
+import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { Table, Form, Spinner, Alert } from "react-bootstrap";
 import { useAllUsers } from "@/features/users/hooks/all-users";
 import { useState } from "react";
 import { formatDate } from "@/utils/date";
+import type { User } from "@/types/users";
 
 type UserStatus = "Active" | "Unverified" | "Blocked";
 
-export default function UserTable({ selectedIds, setSelectedIds }) {
+interface UserTableProps {
+  selectedIds: string[];
+  setSelectedIds: Dispatch<SetStateAction<string[]>>;
+}
+
+export default function UserTable({
+  selectedIds,
+  setSelectedIds,
+}: UserTableProps) {
   const { data, isLoading, error } = useAllUsers();
   const [selectAllState, setSelectAllState] = useState(false);
 
-  const handleCheckboxChange = (e, id) => {
+  const handleCheckboxChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    id: string,
+  ) => {
     const isChecked = e.target.checked;
     setSelectedIds((items) =>
       isChecked ? [...items, id] : items.filter((item) => item !== id),
@@ -17,16 +30,16 @@ export default function UserTable({ selectedIds, setSelectedIds }) {
 
     if (!isChecked) {
       setSelectAllState(false);
-    } else if (selectedIds.length + 1 == data.length) {
+    } else if (data && selectedIds.length + 1 === data.length) {
       setSelectAllState(true);
     }
   };
 
-  const handleAllCheckboxesChange = (e) => {
+  const handleAllCheckboxesChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       setSelectAllState(true);
 
-      const allIds = data.map((item) => item.id);
+      const allIds = data?.map((item) => item.id) ?? [];
       setSelectedIds(allIds);
     } else {
       setSelectAllState(false);
@@ -35,12 +48,12 @@ export default function UserTable({ selectedIds, setSelectedIds }) {
     }
   };
 
-  const getUserStatus = (user): UserStatus => {
+  const getUserStatus = (user: User): UserStatus => {
     if (user.isBlocked) {
       return "Blocked";
-    } else {
-      return user.isVerified ? "Active" : "Unverified";
     }
+
+    return user.isVerified ? "Active" : "Unverified";
   };
 
   if (isLoading) {

@@ -5,6 +5,7 @@ import { useNavigate, useSearchParams } from "react-router";
 import { useVerifyUser } from "@/features/verification/hooks/verify-user";
 import LoadingPage from "@/routes/pages/LoadingPage";
 import { useEffect } from "react";
+import { ApiError } from "@/types/errors";
 
 export default function VerificationCheckPage() {
   const { mutate, isPending, error } = useVerifyUser();
@@ -28,6 +29,21 @@ export default function VerificationCheckPage() {
   }
 
   if (error) {
+    if (error instanceof ApiError) {
+      if (error.code == "USER_ALREADY_VERIFIED") {
+        return (
+          <CenteredLayout>
+            <h1>
+              <FaCheck />
+            </h1>
+            <h2>Your account has already been verified.</h2>
+            <Button className="mt-4" onClick={handleClick}>
+              Home
+            </Button>
+          </CenteredLayout>
+        );
+      }
+    }
     return (
       <CenteredLayout>
         <h1>

@@ -1,12 +1,21 @@
+import type { ReactNode } from "react";
 import { Card as BsCard } from "react-bootstrap";
+
+interface CardProps {
+  children: ReactNode;
+  center?: boolean;
+  title?: string;
+  maxWidth?: string | number;
+  height?: string | number;
+}
 
 export default function Card({
   children,
-  center = null,
-  title = null,
-  maxWidth = null,
-  height = null,
-}) {
+  center = false,
+  title,
+  maxWidth,
+  height,
+}: CardProps) {
   const titleComponent = title ? (
     <BsCard.Title className="text-center mb-4">{title}</BsCard.Title>
   ) : null;
@@ -14,13 +23,13 @@ export default function Card({
   return (
     <BsCard
       style={{
-        maxWidth: maxWidth,
-        width: maxWidth ? "100%" : null,
-        height: height,
+        maxWidth,
+        width: maxWidth ? "100%" : undefined,
+        height,
       }}
     >
       <BsCard.Body
-        className={center ? "d-flex flex-column" : null}
+        className={center ? "d-flex flex-column" : undefined}
         style={{
           overflow: "auto",
         }}
@@ -30,7 +39,7 @@ export default function Card({
           className={
             center
               ? "flex-grow-1 d-flex justify-content-center align-items-center"
-              : null
+              : undefined
           }
         >
           {children}
