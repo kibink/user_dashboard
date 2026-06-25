@@ -6,7 +6,7 @@ interface CenteredLayoutProps {
 
 export default function CenteredLayout({ children }: CenteredLayoutProps) {
   return (
-    <div className="d-flex justify-content-center align-items-center flex-column vh-100 wh-100 bg-light">
+    <div className="d-flex justify-content-center align-items-center flex-column vh-100 bg-light">
       {children}
     </div>
   );

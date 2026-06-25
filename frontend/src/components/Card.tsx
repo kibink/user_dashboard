@@ -28,19 +28,15 @@ export default function Card({
         height,
       }}
     >
-      <BsCard.Body
-        className={center ? "d-flex flex-column" : undefined}
-        style={{
-          overflow: "auto",
-        }}
-      >
+      <BsCard.Body className="d-flex flex-column h-100">
         {titleComponent}
         <div
           className={
             center
               ? "flex-grow-1 d-flex justify-content-center align-items-center"
-              : undefined
+              : "flex-grow-1"
           }
+          style={center ? undefined : { minHeight: 0 }}
         >
           {children}
         </div>

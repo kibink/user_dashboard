@@ -68,7 +68,8 @@ export default function UserTable({
     <Table
       className="table-bordered m-0"
       style={{
-        overflowWrap: "anywhere",
+        overflowWrap: "break-word",
+        overflow: "anywhere",
       }}
     >
       <thead>

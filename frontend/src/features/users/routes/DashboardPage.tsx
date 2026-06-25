@@ -11,12 +11,14 @@ export default function DashboardPage() {
   return (
     <CenteredLayout>
       <Card title="Users" maxWidth="50rem" height="30rem">
-        <Container className="d-flex flex-column gap-2">
+        <Container className="d-flex flex-column gap-2 h-100">
           <UserToolbar selectedIds={selectedIds} />
-          <UserTable
-            selectedIds={selectedIds}
-            setSelectedIds={setSelectedIds}
-          />
+          <div className="flex-grow-1 overflow-auto" style={{ minHeight: 0 }}>
+            <UserTable
+              selectedIds={selectedIds}
+              setSelectedIds={setSelectedIds}
+            />
+          </div>
         </Container>
       </Card>
     </CenteredLayout>
